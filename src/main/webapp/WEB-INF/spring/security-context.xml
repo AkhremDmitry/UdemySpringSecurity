@@ -7,20 +7,21 @@
     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
   <security:http auto-config="true" use-expressions="false">
-    <!--it's default browser login form-->
-    <security:http-basic/>
+    <!--it's customised login form-->
+    <security:form-login login-page="/login" login-processing-url="/login" username-parameter="custom_username"
+        password-parameter="custom_password"/>
 
     <security:intercept-url pattern="/appointments/*" access="ROLE_USER"/>
     <security:intercept-url pattern="/schedule/*" access="ROLE_ADMIN"/>
     <!--ROLE_ANONYMOUS is spring default, order is MATTER-->
-    <security:intercept-url pattern="/**" access="ROLE_ANONYMOUS"/>
+    <security:intercept-url pattern="/**" access="ROLE_ANONYMOUS,ROLE_USER,ROLE_ADMIN"/>
   </security:http>
 
   <security:authentication-manager>
     <security:authentication-provider>
       <security:user-service>
-        <security:user name="user" password="user" authorities="ROLE_USER,ROLE_ANONYMOUS"/>
-        <security:user name="felix" password="felix" authorities="ROLE_USER,ROLE_ADMIN,ROLE_ANONYMOUS"/>
+        <security:user name="user" password="user" authorities="ROLE_USER"/>
+        <security:user name="felix" password="felix" authorities="ROLE_USER,ROLE_ADMIN"/>
       </security:user-service>
     </security:authentication-provider>
   </security:authentication-manager>
