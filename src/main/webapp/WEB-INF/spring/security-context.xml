@@ -8,8 +8,14 @@
 
   <security:http auto-config="true" use-expressions="false">
     <!--it's customised login form-->
+    <!--default-target-url_default page after login-->
+    <!--always-use-default-target_after login always redirect to default form-->
     <security:form-login login-page="/login" login-processing-url="/login" username-parameter="custom_username"
-        password-parameter="custom_password"/>
+        password-parameter="custom_password"
+
+        default-target-url="/appointments/"
+        always-use-default-target="true"
+        authentication-failure-url="/login?error=true"/>
 
     <security:intercept-url pattern="/appointments/*" access="ROLE_USER"/>
     <security:intercept-url pattern="/schedule/*" access="ROLE_ADMIN"/>
