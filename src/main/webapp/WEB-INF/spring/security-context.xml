@@ -7,6 +7,9 @@
     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
   <security:http auto-config="true" use-expressions="false">
+    <!--it's default browser login form-->
+    <security:http-basic/>
+
     <security:intercept-url pattern="/appointments/*" access="ROLE_USER"/>
     <security:intercept-url pattern="/schedule/*" access="ROLE_ADMIN"/>
     <!--ROLE_ANONYMOUS is spring default, order is MATTER-->
