@@ -6,6 +6,8 @@
     http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+  <bean class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"/>
+
   <security:http auto-config="true" use-expressions="false">
     <!--it's customised login form-->
     <!--default-target-url_default page after login-->
