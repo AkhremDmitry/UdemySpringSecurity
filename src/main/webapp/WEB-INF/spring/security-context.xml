@@ -19,6 +19,7 @@
         always-use-default-target="true"
         authentication-failure-url="/login?error=true"/>
 
+    <security:logout logout-url="/logout" logout-success-url="/login?logout=true"/>
     <security:intercept-url pattern="/appointments/*" access="ROLE_USER"/>
     <security:intercept-url pattern="/schedule/*" access="ROLE_ADMIN"/>
     <!--ROLE_ANONYMOUS is spring default, order is MATTER-->
