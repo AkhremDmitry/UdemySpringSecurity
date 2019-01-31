@@ -33,6 +33,7 @@ public class AutoUserTest {
 		autoUser.setLastName("Bowersox");
 		autoUser.setUsername("kmb385");
 		autoUser.setPassword("test");
+		autoUser.setRole("ROLE_USER");
 		
 		Appointment appointment = new Appointment();
 		appointment.setAppointmentDt(LocalDate.now());
