@@ -44,7 +44,8 @@ insert into AUTO_USER (autoUserId, EMAIL, FIRST_NAME, LAST_NAME, PASSWORD, USERN
 insert into AUTO_USER (autoUserId, EMAIL, FIRST_NAME, LAST_NAME, PASSWORD, USERNAME, ROLE) values (null, 'johndoe@gmail.com', 'John', 'Doe', 'password', 'kbowersox', 'ROLE_USER');
 insert into AUTO_USER (autoUserId, EMAIL, FIRST_NAME, LAST_NAME, PASSWORD, USERNAME, ROLE) values (null, 'janedoe@gmail.com', 'Jane', 'Doe', 'password', 'kbowersox', 'ROLE_USER');
 insert into AUTO_USER (autoUserId, EMAIL, FIRST_NAME, LAST_NAME, PASSWORD, USERNAME, ROLE) values (null, 'juniordoe@gmail.com', 'Junior', 'Doe', 'password', 'kbowersox', 'ROLE_USER');
-insert into AUTO_USER (autoUserId, EMAIL, FIRST_NAME, LAST_NAME, PASSWORD, USERNAME, ROLE) values (null, 'felix@gmail.com', 'Dzmitry', 'My', 'felix', 'felix', 'ROLE_USER');
+insert into AUTO_USER (autoUserId, EMAIL, FIRST_NAME, LAST_NAME, PASSWORD, USERNAME, ROLE) values (null, 'felix@gmail.com', 'Dzmitry', 'My', 'felix', 'felix', 'ROLE_ADMIN');
+insert into AUTO_USER (autoUserId, EMAIL, FIRST_NAME, LAST_NAME, PASSWORD, USERNAME, ROLE) values (null, 'user@gmail.com', 'UserName', 'UserLastName', 'user', 'user', 'ROLE_USER');
 
 insert into APPOINTMENT (APPOINTMENT_ID, APPOINTMENT_DT, MAKE, MODEL, YEAR, USER_ID, STATUS) values (1,'2015-08-12 00:00:00', 'Subaru', 'Impreza', '2015', 1, 'Initial');
 insert into APPOINTMENT (APPOINTMENT_ID, APPOINTMENT_DT, MAKE, MODEL, YEAR, USER_ID, STATUS) values (2,'2015-08-12 00:00:00', 'Subaru', 'Legacy', '2015', 2, 'Initial');
