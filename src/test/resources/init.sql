@@ -22,6 +22,7 @@
         LAST_NAME varchar(255),
         PASSWORD varchar(255),
         USERNAME varchar(255),
+        ROLE varchar(255),
         primary key (autoUserId)
     );
 
