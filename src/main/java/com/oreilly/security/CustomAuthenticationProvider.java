@@ -19,17 +19,18 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
   @Override
   public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-    UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
+    CustomAuthnticationToken token = (CustomAuthnticationToken) authentication;
     AutoUser user = repository.findByUsername(token.getName());
 
-    if (user == null || !user.getPassword().equalsIgnoreCase(token.getCredentials().toString())){
+    if (user == null || (!user.getPassword().equalsIgnoreCase(token.getCredentials().toString()))
+    || !token.getMake().equalsIgnoreCase("subaru")){
       throw new BadCredentialsException("The credentials is invalid");
     }
-    return new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
+    return new CustomAuthnticationToken(user, user.getPassword(), user.getAuthorities(), token.getMake());
   }
 
   @Override
   public boolean supports(Class<?> authenticationClass) {
-    return UsernamePasswordAuthenticationToken.class.equals(authenticationClass);
+    return CustomAuthnticationToken.class.equals(authenticationClass);
   }
 }

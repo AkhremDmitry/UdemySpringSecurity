@@ -35,13 +35,17 @@
 		<c:url value="/login" var="loginVar"/>
 		<form id="appointment-form" action="${loginVar}" method="post">
 			<div class="form-group">
-				<label for="make">Username</label>
+				<label for="appointment-form">Username</label>
 				<input name="custom_username" class="form-control" />
 			</div>
 			<div class="form-group">
-				<label for="model">Password</label>
+				<label for="appointment-form">Password</label>
 				<input type="password" name="custom_password" class="form-control" />
 			</div>
+            <div class="form-group">
+                <label for="appointment-form">Automobile Make</label>
+                <input name="make" class="form-control" />
+            </div>
 			<sec:csrfInput/>
 
 			<c:if test = "${param.logout != null}">
