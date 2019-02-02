@@ -9,17 +9,18 @@
   <context:component-scan base-package="com.oreilly.security"/>
   <bean class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"/>
 
-  <security:http auto-config="true" use-expressions="false">
+  <security:http use-expressions="false" entry-point-ref="loginEntryPoint">
     <!--it's customised login form-->
     <!--default-target-url_default page after login-->
     <!--always-use-default-target_after login always redirect to default form-->
-    <security:form-login login-page="/login" login-processing-url="/login" username-parameter="custom_username"
-        password-parameter="custom_password"
+    <!--<security:form-login login-page="/login" login-processing-url="/login" username-parameter="custom_username"-->
+        <!--password-parameter="custom_password"-->
 
-        default-target-url="/appointments/"
-        always-use-default-target="true"
-        authentication-failure-url="/login?error=true"/>
-
+        <!--default-target-url="/appointments/"-->
+        <!--always-use-default-target="true"-->
+        <!--authentication-failure-url="/login?error=true"/>-->
+    <security:custom-filter ref="customFormLoginFilter" position="FORM_LOGIN_FILTER"/>
+    
     <security:logout logout-url="/logout" logout-success-url="/login?logout=true"/>
     <security:intercept-url pattern="/appointments/*" access="ROLE_USER,ROLE_ADMIN"/>
     <security:intercept-url pattern="/schedule/*" access="ROLE_ADMIN"/>
@@ -27,7 +28,28 @@
     <security:intercept-url pattern="/**" access="ROLE_ANONYMOUS,ROLE_USER,ROLE_ADMIN"/>
   </security:http>
 
-  <security:authentication-manager>
+  <bean id="customFormLoginFilter" class="com.oreilly.security.CustomAuthenticationFilter">
+    <property name="filterProcessesUrl" value="/login"/>
+    <property name="authenticationManager" ref="authenticationManager"/>
+    <property name="usernameParameter" value="custom_username"/>
+    <property name="passwordParameter" value="custom_password"/>
+    <property name="authenticationSuccessHandler">
+      <bean class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
+        <property name="defaultTargetUrl" value="/"/>
+      </bean>
+    </property>
+    <property name="authenticationFailureHandler">
+      <bean class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+        <property name="defaultFailureUrl" value="/login/?error=true"/>
+      </bean>
+    </property>
+  </bean>
+
+  <bean id="loginEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+    <constructor-arg value="/login"/>
+  </bean>
+
+  <security:authentication-manager alias="authenticationManager">
     <security:authentication-provider ref="customAuthenticationProvider"/>
   </security:authentication-manager>
 
