@@ -8,6 +8,8 @@
 
   <context:component-scan base-package="com.oreilly.security"/>
   <bean class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"/>
+  <bean name="customAccessDeniedHandler"
+        class="com.oreilly.security.domain.handlers.CustomAccessDeniedHandler" />
 
   <security:http auto-config="true" use-expressions="false">
     <!--it's customised login form-->
@@ -19,7 +21,8 @@
         default-target-url="/appointments/"
         always-use-default-target="true"
         authentication-failure-url="/login?error=true"/>
-
+    <!--<security:access-denied-handler error-page="/accessDenied"/>-->
+    <security:access-denied-handler ref="customAccessDeniedHandler"/>
     <security:logout logout-url="/logout" logout-success-url="/login?logout=true"/>
     <security:intercept-url pattern="/appointments/*" access="ROLE_USER,ROLE_ADMIN"/>
     <security:intercept-url pattern="/schedule/*" access="ROLE_ADMIN"/>

@@ -50,6 +50,11 @@ public class HomeController {
 		return "login";
 	}
 
+	@RequestMapping(value = "/accessDenied", method = RequestMethod.GET)
+	public String goErrorPage(){
+		return "accessDenied";
+	}
+
 	@RequestMapping("/schedule")
 	public String goSchedule(){
 		return "schedule";
