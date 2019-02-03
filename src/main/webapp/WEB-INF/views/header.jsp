@@ -10,7 +10,10 @@
 			<ul class="nav navbar-nav">
 				<li><a href="<spring:url value="/services/"/>">Services</a></li>
 				<li><a href="<spring:url value="/appointments/"/>">Appointments</a></li>
+				<%--Code below was added to hide "/schedule/" link if User doesn't have access--%>
+				<sec:authorize url="//schedule/**">
 				<li><a href="<spring:url value="/schedule/" />">Schedule</a></li>
+				</sec:authorize>
 
 				<sec:authorize access="authenticated" var="authenticated"/>
 
