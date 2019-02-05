@@ -28,7 +28,9 @@
   </security:http>
 
   <security:authentication-manager>
-    <security:authentication-provider ref="customAuthenticationProvider"/>
+    <security:authentication-provider>
+      <security:jdbc-user-service data-source-ref="datasource"/>
+    </security:authentication-provider>
   </security:authentication-manager>
 
 </beans>
