@@ -75,8 +75,8 @@
         foreign key (APPOINTMENT_ID) 
         references APPOINTMENT;
 
-insert into users(username, password, enabled)  values ('nuser', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 1);
-insert into users(username, password, enabled)  values ('auser', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 1);
+insert into users(username, password, enabled)  values ('nuser', 'b1c0cddc4a7fd339026f4c24ffd45b548dffedff895b4bd9fe1cdfdbb39ae06d5b649e66db95d112', 1);
+insert into users(username, password, enabled)  values ('auser', '323521b5505956eba7c45751337e3f6972e7f8fed8673d55d602fcde4aa2ffecf239a9a6598c217b', 1);
 -- insert into authorities(username, authority)  values ('nuser', 'ROLE_ADMIN');
 
 insert into groups(id, group_name) values (1, 'Admins');
