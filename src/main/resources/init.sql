@@ -27,7 +27,7 @@
 
     create table users(
         username varchar_ignorecase(50) not null primary key,
-        password varchar_ignorecase(50) not null,
+        password varchar_ignorecase(255) not null,
         enabled boolean not null
     );
 
@@ -75,8 +75,8 @@
         foreign key (APPOINTMENT_ID) 
         references APPOINTMENT;
 
-insert into users(username, password, enabled)  values ('nuser', 'password', 1);
-insert into users(username, password, enabled)  values ('auser', 'password', 1);
+insert into users(username, password, enabled)  values ('nuser', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 1);
+insert into users(username, password, enabled)  values ('auser', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 1);
 -- insert into authorities(username, authority)  values ('nuser', 'ROLE_ADMIN');
 
 insert into groups(id, group_name) values (1, 'Admins');
