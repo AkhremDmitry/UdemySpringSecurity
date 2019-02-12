@@ -1,5 +1,6 @@
 package com.oreilly.security.web.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oreilly.security.domain.entities.Appointment;
 import com.oreilly.security.domain.entities.AutoUser;
+import com.oreilly.security.domain.entities.util.AppointmentUtils;
 import com.oreilly.security.domain.repositories.AppointmentRepository;
 import com.oreilly.security.domain.repositories.AutoUserRepository;
 
@@ -33,6 +35,9 @@ public class AppointmentController {
 	@Autowired
 	private AutoUserRepository autoUserRepository;
 
+	@Autowired
+  private AppointmentUtils utils;
+
 	@ModelAttribute("isUser")
 	public boolean isUser (Authentication auth){
 		return auth != null &&
@@ -43,6 +48,20 @@ public class AppointmentController {
 	public Appointment getAppointment(){
 		return new Appointment();
 	}
+
+	@RequestMapping("/test")
+	@ResponseBody
+	public String testPrefilter(Authentication auth){
+    AutoUser user = (AutoUser)auth.getPrincipal();
+    AutoUser otherUser = new AutoUser();
+    otherUser.setEmail("haxor@haxor.org");
+    otherUser.setAutoUserId(100L);
+
+    return utils.saveAll(new ArrayList<Appointment>(){{
+      add(utils.createAppointment(user));
+      add(utils.createAppointment(otherUser));
+    }});
+  }
 
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String getAppointmentPage(){

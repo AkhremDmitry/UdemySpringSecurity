@@ -52,7 +52,11 @@ public class AutoUser implements UserDetails {
 	public Long getAutoUserId() {
 		return autoUserId;
 	}
-	
+
+	public void setAutoUserId(Long autoUserId) {
+		this.autoUserId = autoUserId;
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}
