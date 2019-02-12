@@ -48,6 +48,10 @@ public class AutoUser implements UserDetails {
 	@JsonIgnore
 	@OneToMany(mappedBy="user", cascade=CascadeType.PERSIST)
 	private List<Appointment> appointments = new ArrayList<Appointment>();
+
+	public Long getAutoUserId() {
+		return autoUserId;
+	}
 	
 	public String getFirstName() {
 		return firstName;

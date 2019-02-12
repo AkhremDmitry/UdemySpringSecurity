@@ -3,6 +3,7 @@ package com.oreilly.security.web.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -58,11 +59,18 @@ public class AppointmentController {
 	
 	@ResponseBody
 	@RequestMapping("/all")
-	public List<Appointment> getAppointments(){
-		return this.appointmentRepository.findAll();
+	public List<Appointment> getAppointments(Authentication auth){
+	  if (auth.getAuthorities().contains(AuthorityUtils.createAuthorityList("ROLE_ADMIN").get(0))){
+      return this.appointmentRepository.findAll();
+    }
+	  else {
+	    return appointmentRepository.findByUser((AutoUser)auth.getPrincipal());
+    }
+
 	}
 
 	@RequestMapping("/{appointmentId}")
+  @PostAuthorize("principal.autoUserId == #model[appointment].user.autoUserId")
 	public String getAppointment(@PathVariable("appointmentId") Long appointmentId, Model model){
 		Appointment appointment = appointmentRepository.findOne(appointmentId);
 		model.addAttribute("appointment", appointment);
