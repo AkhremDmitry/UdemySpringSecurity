@@ -3,6 +3,7 @@ package com.oreilly.security.web.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -67,5 +68,24 @@ public class AppointmentController {
 		model.addAttribute("appointment", appointment);
 		return "appointment";
 	}
+
+	@ResponseBody
+  @RequestMapping("/confirm")
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
+  public String confirm(){
+	  return "confirmed";
+  }
+
+  @ResponseBody
+  @RequestMapping("/cancel")
+  public String cancel(){
+	  return "canceled";
+  }
+
+  @ResponseBody
+  @RequestMapping("/complete")
+  public String complete(){
+	  return "completed";
+  }
 	
 }
