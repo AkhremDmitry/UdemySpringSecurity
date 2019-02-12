@@ -3,6 +3,8 @@ package com.oreilly.security.web.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +28,13 @@ public class AppointmentController {
 
 	@Autowired
 	private AutoUserRepository autoUserRepository;
-	
+
+	@ModelAttribute("isUser")
+	public boolean isUser (Authentication auth){
+		return auth != null &&
+				auth.getAuthorities().contains(AuthorityUtils.createAuthorityList("ROLE_USER").get(0));
+	}
+
 	@ModelAttribute
 	public Appointment getAppointment(){
 		return new Appointment();

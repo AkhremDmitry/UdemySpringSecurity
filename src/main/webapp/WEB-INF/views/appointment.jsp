@@ -61,7 +61,7 @@
 			<li class="list-group-item">
 				<a class="btn btn-default"
 				   href="<spring:url value="/appointments/"/>" role="button">Back</a>
-				<sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">
+				<sec:authorize access="${isUser}">
 					<a class="btn btn-default"
 					   href="<spring:url value="/appointments/cancel"/>" role="button">Cancel</a>
 				</sec:authorize>
