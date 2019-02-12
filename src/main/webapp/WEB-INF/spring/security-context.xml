@@ -22,9 +22,9 @@
 
     <security:logout logout-url="/logout" logout-success-url="/login?logout=true"/>
     <security:intercept-url pattern="/appointments/*" access="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')"/>
-    <security:intercept-url pattern="/schedule/*" access="hasAuthority('ROLE_ADMIN')"/>
+    <security:intercept-url pattern="/schedule/*" access="principal.username == 'felix'"/>
     <!--ROLE_ANONYMOUS is spring default, order is MATTER-->
-    <security:intercept-url pattern="/**" access="hasAnyRole('ROLE_ANONYMOUS', 'ROLE_USER', 'ROLE_ADMIN')"/>
+    <security:intercept-url pattern="/**" access="permitAll"/>
   </security:http>
 
   <security:authentication-manager>
