@@ -2,6 +2,8 @@ package com.oreilly.security.web.controllers;
 
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -70,7 +72,8 @@ public class AppointmentController {
 	}
 
 	@RequestMapping("/{appointmentId}")
-  @PostAuthorize("principal.autoUserId == #model[appointment].user.autoUserId")
+  @PostAuthorize("(principal.autoUserId == #model[appointment].user.autoUserId) "
+			+ "or (principal.username == 'felix')") //that workaround created to give permission for ADMIN(felix)
 	public String getAppointment(@PathVariable("appointmentId") Long appointmentId, Model model){
 		Appointment appointment = appointmentRepository.findOne(appointmentId);
 		model.addAttribute("appointment", appointment);
@@ -79,7 +82,7 @@ public class AppointmentController {
 
 	@ResponseBody
   @RequestMapping("/confirm")
-  @PreAuthorize("hasRole('ROLE_ADMIN')")
+  @RolesAllowed("ROLE_ADMIN")
   public String confirm(){
 	  return "confirmed";
   }
@@ -92,6 +95,7 @@ public class AppointmentController {
 
   @ResponseBody
   @RequestMapping("/complete")
+	@RolesAllowed("ROLE_ADMIN")
   public String complete(){
 	  return "completed";
   }
