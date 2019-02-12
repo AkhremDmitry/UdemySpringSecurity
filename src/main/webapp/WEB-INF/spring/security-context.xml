@@ -9,7 +9,7 @@
   <context:component-scan base-package="com.oreilly.security"/>
   <bean class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"/>
 
-  <security:http auto-config="true" use-expressions="false">
+  <security:http auto-config="true" use-expressions="true">
     <!--it's customised login form-->
     <!--default-target-url_default page after login-->
     <!--always-use-default-target_after login always redirect to default form-->
@@ -21,10 +21,10 @@
         authentication-failure-url="/login?error=true"/>
 
     <security:logout logout-url="/logout" logout-success-url="/login?logout=true"/>
-    <security:intercept-url pattern="/appointments/*" access="ROLE_USER,ROLE_ADMIN"/>
-    <security:intercept-url pattern="/schedule/*" access="ROLE_ADMIN"/>
+    <security:intercept-url pattern="/appointments/*" access="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')"/>
+    <security:intercept-url pattern="/schedule/*" access="hasAuthority('ROLE_ADMIN')"/>
     <!--ROLE_ANONYMOUS is spring default, order is MATTER-->
-    <security:intercept-url pattern="/**" access="ROLE_ANONYMOUS,ROLE_USER,ROLE_ADMIN"/>
+    <security:intercept-url pattern="/**" access="hasAnyRole('ROLE_ANONYMOUS', 'ROLE_USER', 'ROLE_ADMIN')"/>
   </security:http>
 
   <security:authentication-manager>
